@@ -1,0 +1,3 @@
+[workspace]
+members = [ "labs/lab1_sqs_hello_queue","shared"]
+resolver = "2"
