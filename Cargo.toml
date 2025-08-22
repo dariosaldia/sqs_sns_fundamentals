@@ -1,3 +1,15 @@
 [workspace]
 members = [ "labs/lab1_sqs_hello_queue","shared"]
 resolver = "2"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+config = "0.15.14"
+anyhow = "1"
+aws-config = "1"
+aws-sdk-sqs = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+clap = { version = "4", features = ["derive"] }
+aws-credential-types = "1"

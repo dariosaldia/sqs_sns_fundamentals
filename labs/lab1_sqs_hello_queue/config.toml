@@ -1,0 +1,3 @@
+[sqs]
+queue_name = "lab1-hello-queue"
+visibility_timeout_secs = 3
