@@ -1,0 +1,6 @@
+[package]
+name = "lab2_message_attributes_fifo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]

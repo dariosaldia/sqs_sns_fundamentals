@@ -1,5 +1,5 @@
 [workspace]
-members = [ "labs/lab1_sqs_hello_queue","shared"]
+members = [ "labs/lab1_sqs_hello_queue", "labs/lab2_message_attributes_fifo","shared"]
 resolver = "2"
 
 [workspace.dependencies]
