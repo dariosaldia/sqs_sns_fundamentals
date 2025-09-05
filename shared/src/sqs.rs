@@ -25,6 +25,27 @@ pub async fn create_queue(client: &Client, sqs_cfg: &SqsConfig) -> Result<String
 
     let mut req = client.create_queue().queue_name(name);
 
+    // FIFO handling: either explicitly set in config or inferred from name
+    let name_is_fifo = name.ends_with(".fifo");
+    let cfg_fifo = sqs_cfg.fifo.unwrap_or(name_is_fifo);
+    if cfg_fifo {
+        if !name_is_fifo {
+            return Err(anyhow!(
+                "fifo=true requires the queue name to end with .fifo (got: {})",
+                name
+            ));
+        }
+        req = req.attributes(QueueAttributeName::FifoQueue, "true");
+        if let Some(true) = sqs_cfg.content_based_dedup {
+            req = req.attributes(QueueAttributeName::ContentBasedDeduplication, "true");
+        }
+    } else if name_is_fifo {
+        // User named it *.fifo but explicitly disabled FIFO
+        return Err(anyhow!(
+            "Queue name ends with .fifo but fifo=false in config. Either set fifo=true or rename the queue."
+        ));
+    }
+
     if let Some(vt) = sqs_cfg.visibility_timeout_secs {
         req = req.attributes(QueueAttributeName::VisibilityTimeout, vt.to_string());
     }

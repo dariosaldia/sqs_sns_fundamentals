@@ -24,6 +24,8 @@ pub struct SqsConfig {
     pub queue_name: Option<String>,
     pub endpoint_url: Option<String>,
     pub visibility_timeout_secs: Option<i32>,
+    pub fifo: Option<bool>,
+    pub content_based_dedup: Option<bool>,
 }
 
 #[derive(Debug, Clone, Deserialize, Default)]

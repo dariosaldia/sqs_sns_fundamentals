@@ -18,6 +18,12 @@ guard-config:
 	  exit 1; \
 	fi
 
+.PHONY: run
+run: guard-config
+	@if [ -z "$(BIN)" ]; then echo "Provide BIN=<binary_name>"; exit 1; fi
+	cargo run --manifest-path $(LAB_DIR)/Cargo.toml --bin $(BIN) -- \
+	  --config $(CONFIG) --lab-config $(LAB_DIR)/config.toml $(ARGS)
+
 bootstrap: guard-config
 	cargo run --manifest-path shared/Cargo.toml --bin bootstrap -- \
 		--config $(CONFIG) --lab-config $(LAB_DIR)/config.toml

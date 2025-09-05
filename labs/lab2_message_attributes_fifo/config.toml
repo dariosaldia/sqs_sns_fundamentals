@@ -1,0 +1,4 @@
+[sqs]
+queue_name = "lab2-fifo-queue.fifo"
+fifo = true
+content_based_dedup = true

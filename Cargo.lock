@@ -1448,6 +1448,15 @@ dependencies = [
 [[package]]
 name = "lab2_message_attributes_fifo"
 version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "aws-sdk-sqs",
+ "clap",
+ "shared",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+]
 
 [[package]]
 name = "lazy_static"
